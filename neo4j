@@ -1,0 +1,14 @@
+load csv with headers from 'file:///home/abhinav/Desktop/FCNProject/ASN-Name-Mapping.csv' as ASes create
+(as:AS {label: ASes.ASN, name: ASes.Name })
+
+load csv with headers from 'file:///home/abhinav/Desktop/FCNProject/AS-Relationships-test-P2P.csv' as Rel
+match (a:AS {label: Rel.Source}),(b:AS {label: Rel.Destination}) create (a) -[r:PeerToPeer]-> (b)
+
+load csv with headers from 'file:///home/abhinav/Desktop/FCNProject/AS-Relationships-test-P2C.csv' as Rel
+match (a:AS {label: Rel.Source}),(b:AS {label: Rel.Destination}) create (a) -[r:ProviderToCustomer]-> (b)
+
+match (n) return (n) limit 1000
+
+/home/abhinav/Desktop/FCNProject/neo4j-community-2.3.3/data/
+
+MATCH (n) OPTIONAL MATCH (n)-[r]-() DELETE n,r
