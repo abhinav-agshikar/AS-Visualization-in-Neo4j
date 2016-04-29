@@ -1,0 +1,14 @@
+load csv with headers from 'file:///home/abhinav/Desktop/FCNProject/demo/ASN-Name-Mapping.csv' as ASes create (as:AS {label: ASes.ASN, name: ASes.Name })
+
+load csv with headers from 'file:///home/abhinav/Desktop/FCNProject/demo/P2P.csv' as Rel
+match (a:AS {label: Rel.Source}),(b:AS {label: Rel.Destination}) create (a) -[r:P2P]-> (b)
+
+load csv with headers from 'file:///home/abhinav/Desktop/FCNProject/demo/P2C.csv' as Rel
+match (a:AS {label: Rel.Source}),(b:AS {label: Rel.Destination}) create (a) -[r:P2C]-> (b)
+
+match (n) return (n) limit 10
+
+Explode Passe.
+
+
+MATCH (n) OPTIONAL MATCH (n)-[r]-() DELETE n,r
